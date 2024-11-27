@@ -69,7 +69,7 @@ class Notice {
 	 *
 	 * @since 1.0.0
 	 */
-	private $screens = array();
+	private $screens = [];
 
 	/**
 	 * Notice classes.
@@ -78,7 +78,7 @@ class Notice {
 	 *
 	 * @since 1.0.0
 	 */
-	private $classes = array( 'notice', 'notice-info' );
+	private $classes = [ 'notice', 'notice-info' ];
 
 	/**
 	 * Actions link texts.
@@ -87,7 +87,7 @@ class Notice {
 	 *
 	 * @since 1.0.0
 	 */
-	private $action_labels = array();
+	private $action_labels = [];
 
 	/**
 	 * Message.
@@ -134,7 +134,7 @@ class Notice {
 	 * @return Notice
 	 */
 	public static function init( $args ) {
-		static $notices = array();
+		static $notices = [];
 
 		$slug = ( isset( $args['slug'] ) && ! empty( $args['slug'] ) ) ? $args['slug'] : '';
 
@@ -155,7 +155,7 @@ class Notice {
 	 * @since 1.0.0
 	 */
 	public function hooks() {
-		add_action( 'admin_notices', array( $this, 'hook_notice' ) );
+		add_action( 'admin_notices', [ $this, 'hook_notice' ] );
 	}
 
 	/**
@@ -238,7 +238,7 @@ class Notice {
 		?>
 
 		<div id="wp-admin-notice-<?php echo esc_attr( $this->slug ); ?>" class="<?php echo esc_attr( $this->get_classes() ); ?>">
-			<p><?php echo $this->message; ?></p>
+			<p><?php echo $this->message; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 
 			<?php $this->render_links(); ?>
 		</div>
@@ -252,13 +252,20 @@ class Notice {
 	 *
 	 * @return bool True if it's time to show notice.
 	 */
-	protected function is_time() {
+	protected function is_time_to_show() {
 		// Get the notice time.
 		$time = get_site_option( $this->key( 'time' ) );
 
+		$current_time      = current_datetime();
+		$current_timestamp = $current_time->getTimestamp();
+
 		// If not set, set now and bail.
 		if ( empty( $time ) ) {
-			$time = time() + ( $this->days * DAY_IN_SECONDS );
+			$interval = \DateInterval::createFromDateString( $this->days . ' day' );
+
+			$new_target_date = $current_time->add( $interval );
+
+			$time = $new_target_date->getTimestamp();
 
 			// Set to future.
 			update_site_option( $this->key( 'time' ), $time );
@@ -267,7 +274,7 @@ class Notice {
 		}
 
 		// Check if time passed or reached.
-		return (int) $time <= time();
+		return (int) $time <= $current_timestamp;
 	}
 
 	/**
@@ -282,11 +289,7 @@ class Notice {
 		$current_user = wp_get_current_user();
 
 		// Check if current item is dismissed.
-		return (bool) get_user_meta(
-			$current_user->ID,
-			$this->key( 'dismissed' ),
-			true
-		);
+		return (bool) get_user_meta( $current_user->ID, $this->key( 'dismissed' ), true );
 	}
 
 	/**
@@ -333,7 +336,7 @@ class Notice {
 	 */
 	protected function get_classes() {
 		// Required classes.
-		$classes = array( 'notice', 'notice-info' );
+		$classes = [ 'notice', 'notice-info' ];
 
 		// Add extra classes.
 		if ( ! empty( $this->classes ) && is_array( $this->classes ) ) {
@@ -353,8 +356,8 @@ class Notice {
 	 */
 	protected function get_message() {
 		$message = sprintf(
-		// translators: %1$s Name, %2$s days.
-			esc_html__( 'Hello! Seems like you have been using %1$s for more than %2$d days – that’s awesome! Could you please do us a BIG favor and give it a 5-star rating on WordPress? This would boost our motivation and help us spread the word.', 'wp-admin-notice' ),
+			/* translators: 1: Name, 2: Days. */
+			esc_html__( 'Hello! Seems like you have been using %1$s for more than %2$d days - that\'s awesome! Could you please do us a BIG favor and give it a 5-star rating on WordPress? This would boost our motivation and help us spread the word.', 'wp-admin-notice' ),
 			'<strong>' . esc_html( $this->name ) . '</strong>',
 			(int) $this->days
 		);
@@ -373,7 +376,7 @@ class Notice {
 		return (
 			$this->in_screen() &&
 			$this->is_capable() &&
-			$this->is_time() &&
+			$this->is_time_to_show() &&
 			! $this->is_dismissed()
 		);
 	}
@@ -395,7 +398,7 @@ class Notice {
 			return;
 		}
 
-		$action_list = array( 'later', 'dismiss' );
+		$action_list = [ 'later', 'dismiss' ];
 
 		$action = '';
 
@@ -411,7 +414,15 @@ class Notice {
 			switch ( $action ) {
 				case 'later':
 					// Show after 7 days.
-					$time = time() + ( $this->days * DAY_IN_SECONDS + 7 * DAY_IN_SECONDS );
+					$current_time      = current_datetime();
+					$current_timestamp = $current_time->getTimestamp();
+
+					$interval = \DateInterval::createFromDateString( $this->days . ' day' );
+
+					$new_target_date = $current_time->add( $interval );
+
+					$time = $new_target_date->getTimestamp();
+
 					update_site_option( $this->key( 'time' ), $time );
 					break;
 
@@ -441,28 +452,28 @@ class Notice {
 		// Default arguments.
 		$args = wp_parse_args(
 			$args,
-			array(
+			[
 				'days'          => 7,
 				'name'          => ucwords( str_replace( '-', ' ', $slug ) ),
 				'capability'    => 'manage_options',
 				'type'          => 'plugin',
-				'screens'       => array(),
-				'classes'       => array(),
-				'action_labels' => array(),
-			)
+				'screens'       => [],
+				'classes'       => [],
+				'action_labels' => [],
+			]
 		);
 
 		// Action button/link labels.
 		$this->action_labels = wp_parse_args(
 			(array) $args['action_labels'],
-			array(
+			[
 				'review'  => esc_html__( 'Ok, you deserve it', 'wp-admin-notice' ),
 				'later'   => esc_html__( 'Nope, maybe later', 'wp-admin-notice' ),
 				'dismiss' => esc_html__( 'I already did', 'wp-admin-notice' ),
-			)
+			]
 		);
 
-		if ( ! in_array( $args['type'], array( 'plugin', 'theme' ), true ) ) {
+		if ( ! in_array( $args['type'], [ 'plugin', 'theme' ], true ) ) {
 			$args['type'] = 'plugin';
 		}
 
