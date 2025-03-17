@@ -12,7 +12,7 @@ if ( !defined( 'ABSPATH' ) ) {
   exit( 'Direct script access denied.' );
 }
 
-define( 'ZINO_VERSION', '1.1.5' );
+define( 'ZINO_VERSION', '1.1.6' );
 define( 'ZINO_DIR', rtrim( get_template_directory(), '/' ) );
 define( 'ZINO_URI', rtrim( get_template_directory_uri(), '/' ) );
 
@@ -74,3 +74,30 @@ function zino_add_donate_link() {
 }
 
 add_action( 'zino_after_admin_notice_link_items', 'zino_add_donate_link' );
+
+/**
+ * TGM Plugin activation.
+ *
+ * @since 1.1.6
+ */
+
+require_once trailingslashit( get_template_directory() ) . '/class-tgm-plugin-activation.php';
+
+/*--------------------------------------------------------------
+# Include Recommended Plugins
+--------------------------------------------------------------*/
+
+function zino_register_required_plugins() {
+
+  $plugins = array(
+    array(
+      'name'      => esc_html__( 'All In One Captcha', 'zino' ),
+      'slug'      => 'all-in-one-captcha',
+      'required'  => false,
+    ),
+  );
+
+  tgmpa( $plugins );
+}
+
+add_action( 'tgmpa_register', 'zino_register_required_plugins' );
