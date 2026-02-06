@@ -4,7 +4,7 @@ Contributors: Manesh Timilsina
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.1.8
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Zino is a minimal and lightweight Full Site Editing theme. This speed optimized 
 
 == Copyright ==
 
-Zino WordPress Theme, (C) 2024 Manesh Timilsina
+Zino WordPress Theme, (C) 2025 Manesh Timilsina
 Zino is distributed under the terms of the GNU GPL.
 
 This program is free software: you can redistribute it and/or modify
@@ -28,6 +28,12 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 == Changelog ==
+
+= 1.2.0 - November 17, 2025 =
+* Fix escaping in patterns
+
+= 1.1.9 - October 11, 2025 =
+* X icon and link updated
 
 = 1.1.8 - August 22, 2025 =
 * TGM plugin recommendation removed
