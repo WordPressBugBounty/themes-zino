@@ -1,8 +1,8 @@
-# Copyright (C) 2025 Manesh Timilsina
+# Copyright (C) 2026 Manesh Timilsina
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Zino 1.2.0\n"
+"Project-Id-Version: Zino 1.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/zino\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
