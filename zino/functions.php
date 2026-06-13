@@ -12,7 +12,7 @@ if ( !defined( 'ABSPATH' ) ) {
   exit( 'Direct script access denied.' );
 }
 
-define( 'ZINO_VERSION', '1.2.1' );
+define( 'ZINO_VERSION', '1.2.2' );
 define( 'ZINO_DIR', rtrim( get_template_directory(), '/' ) );
 define( 'ZINO_URI', rtrim( get_template_directory_uri(), '/' ) );
 
@@ -34,7 +34,6 @@ if ( !function_exists( 'zino_setup' ) ) {
     add_theme_support( 'editor-styles' );
     add_theme_support( 'html5', array( 'comment-form', 'comment-list' ) );
     add_theme_support( 'responsive-embeds' );
-    add_theme_support( 'customize-selective-refresh-widgets' );
   }
 }
 
