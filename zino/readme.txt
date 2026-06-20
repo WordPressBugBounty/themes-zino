@@ -4,7 +4,7 @@ Contributors: Manesh Timilsina
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,9 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 == Changelog ==
+
+= 1.2.3 - June 19, 2026 =
+* No Title and Space Template Update
 
 = 1.2.2 - June 12, 2026 =
 * PHP requirement update
