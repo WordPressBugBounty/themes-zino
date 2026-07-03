@@ -1,10 +1,10 @@
 === Zino ===
 
 Contributors: Manesh Timilsina
-Requires at least: 6.0
+Requires at least: 6.6
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.3
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,12 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 == Changelog ==
+
+= 1.2.5 - July 03, 2026 =
+* Replace static colors with preset
+
+= 1.2.4 - July 01, 2026 =
+* Update theme JSON to V3
 
 = 1.2.3 - June 19, 2026 =
 * No Title and Space Template Update
