@@ -1,0 +1,27 @@
+.zino-free-vs-pro {
+	max-width: 790px;
+	margin-block-start: 24px;
+}
+
+.free-vs-pro-table th:not(:first-child),
+.free-vs-pro-table td:not(:first-child) {
+	text-align: center;
+}
+
+.free-vs-pro-table .dashicons-yes {
+	color: #1aaf57;
+}
+
+.free-vs-pro-table .dashicons-no {
+	color: #cc1818;
+}
+
+.zino-free-vs-pro .buttons {
+	display: flex;
+	gap: 12px;
+	justify-content: flex-end;
+}
+
+.zino-free-vs-pro a.button {
+	margin-block-start: 24px;
+}

@@ -4,7 +4,7 @@ Contributors: Manesh Timilsina
 Requires at least: 6.6
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,9 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 == Changelog ==
+
+= 1.2.6 - July 09, 2026 =
+* Replace static font with preset
 
 = 1.2.5 - July 03, 2026 =
 * Replace static colors with preset
