@@ -12,7 +12,7 @@ if ( !defined( 'ABSPATH' ) ) {
   exit( 'Direct script access denied.' );
 }
 
-define( 'ZINO_VERSION', '1.2.6' );
+define( 'ZINO_VERSION', '1.2.7' );
 define( 'ZINO_DIR', rtrim( get_template_directory(), '/' ) );
 define( 'ZINO_URI', rtrim( get_template_directory_uri(), '/' ) );
 
@@ -75,7 +75,7 @@ function zino_add_admin_notice() {
 add_action( 'admin_init', 'zino_add_admin_notice' );
 
 function zino_add_donate_link() {
-  echo '<span style="font-weight: bold;"><a href="https://zinowp.com/pricing/" target="_blank">Upgrade to Pro</a></span>';
+  echo '<span style="font-weight: bold;"><a href="https://zinowp.com/pricing/" target="_blank" rel="noopener">Upgrade to Pro</a></span>';
 }
 
 add_action( 'zino_after_admin_notice_link_items', 'zino_add_donate_link' );
